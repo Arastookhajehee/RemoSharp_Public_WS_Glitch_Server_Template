@@ -17,9 +17,14 @@ wsServer.on('connection', function(socket) {
 
         // socket.send(message + "");
         // broadcasting the message to the clients
-        wsServer.clients.forEach(function(client){
-            client.send(msg + "");
-        });
+        // Making sure the message is not the Keyword Message
+        // the Keyword message is used only to stay connected to the 
+        // echo server, iow, keep the server alive
+        if (msg != "YAY! Still Friends!") {
+          wsServer.clients.forEach(function(client){
+              client.send(msg + "");
+          });
+        }  
 
     });
 });
